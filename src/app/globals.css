@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* ── VS Fitness Club — editorial design tokens ─────────────── */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  /* Surfaces */
+  --color-ink: #090909;
+  --color-coal: #101010;
+  --color-line: rgba(244, 242, 237, 0.12);
+
+  /* Type */
+  --color-paper: #f4f2ed;
+  --color-mute: #929292;
+  --color-fog: #5c5c5c;
+
+  /* Accent — the shield red from the owner's logo, lifted one step for
+     legible contrast on ink. Used sparingly: punctuation, indices, hovers. */
+  --color-signal: #ea2b23;
+}
+
+:root {
+  --radius: 0rem;
+
+  /* Permanent dark theme — ink base, paper type */
+  --background: #090909;
+  --foreground: #f4f2ed;
+  --card: #101010;
+  --card-foreground: #f4f2ed;
+  --popover: #101010;
+  --popover-foreground: #f4f2ed;
+  --primary: #ea2b23;
+  --primary-foreground: #090909;
+  --secondary: #161616;
+  --secondary-foreground: #f4f2ed;
+  --muted: #141414;
+  --muted-foreground: #929292;
+  --accent: #161616;
+  --accent-foreground: #f4f2ed;
+  --destructive: #ff5c45;
+  --border: rgba(244, 242, 237, 0.12);
+  --input: rgba(244, 242, 237, 0.16);
+  --ring: #ea2b23;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Fixed navbar offset for anchor navigation */
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: #ea2b23;
+    color: #f4f2ed;
+  }
+
+  /* Section anchors offset by fixed header height */
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+}
+
+@layer utilities {
+  /* Premium thin scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0b0b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #242424;
+    border: 2px solid #0b0b0b;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #383838;
+  }
+
+  /* Condensed display headline */
+  .display {
+    font-family: var(--font-anton), "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: 0.005em;
+  }
+
+  /* Mono metadata label — Swiss caption style */
+  .meta {
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /*
+   * Unified photographic grade — cinematic B&W editorial treatment.
+   * Every photograph on the site shares one grade so mixed imagery reads
+   * as a single commissioned photo essay. Remove this class when the
+   * club's final photography ships with its own consistent grade.
+   */
+  .photo-grade {
+    filter: grayscale(1) contrast(1.07) brightness(0.96);
+  }
+
+  .meta-sm {
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+}
+
+/* ── Motion preferences ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
